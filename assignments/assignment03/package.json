@@ -1,5 +1,5 @@
 {
-  "name": "05-express",
+  "name": "assignment03",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -8,8 +8,5 @@
     "start": "nodemon app.js"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "body-parser": "^1.20.1"
-  }
+  "license": "ISC"
 }
