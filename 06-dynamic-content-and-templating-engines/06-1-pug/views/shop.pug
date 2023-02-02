@@ -1,0 +1,20 @@
+extends layouts/main-layout
+
+block head
+    title Shop
+
+block content
+    main
+        if prods.length > 0
+            h1 Products
+            div.prod-grid
+                each prod in prods
+                    .prod-card
+                        h2 #{prod.title}
+                        img(src="https://media.harrypotterfanzone.com/sorcerer-stone-childrens-tenth-anniversary-edition.jpg",
+                            style="width: 20vw;")
+                        h2 $19.99
+                        p.prod-text Harry Potter and the Philosopher’s Stone is the first installment of the popular Harry Potter book series by J.K. Rowling. It follows the events of Harry Potter’s first year at Hogwarts.
+                        button Add to Cart
+        else
+            h1 No Products

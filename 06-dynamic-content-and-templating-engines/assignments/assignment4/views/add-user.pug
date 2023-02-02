@@ -1,0 +1,10 @@
+extends layouts/main
+
+block head
+    title Add User
+
+block content
+    h1 Add User
+    form(action="add-user", method="POST")
+        input(type="text", name="username", placeholder="Enter username...")
+        button(type="submit") Submit

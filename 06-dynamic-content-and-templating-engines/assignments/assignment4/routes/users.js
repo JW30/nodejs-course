@@ -1,13 +1,11 @@
-const path = require("path");
-
 const express = require("express");
 
-const rootDir = require("../util/path");
+const data = require("./add-user");
 
 const router = express.Router();
 
 router.get("/", (req, res, next) => {
-    res.sendFile(path.join(rootDir, "views", "shop.hbs"));
+    res.render("users", {users: data.users, active: "users"});
 });
 
 module.exports = router;

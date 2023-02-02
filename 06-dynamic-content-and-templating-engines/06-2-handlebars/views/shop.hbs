@@ -1,0 +1,25 @@
+<main>
+    {{#if prods}}
+        <h1>Products</h1>
+        <div class="prod-grid">
+            {{#each prods}}
+            <div class="prod-card">
+                <h2>{{this.title}}</h2>
+                <img src="https://media.harrypotterfanzone.com/sorcerer-stone-childrens-tenth-anniversary-edition.jpg"
+                     style="width: 20vw;">
+                <h2>$19.99</h2>
+                <p class="prod-text">Harry Potter and the Philosopher’s Stone
+                    is
+                    the first installment of the popular Harry Potter book
+                    series
+                    by J.K. Rowling. It follows the events of Harry Potter’s
+                    first
+                    year at Hogwarts.</p>
+                <button>Add to Cart</button>
+            </div>
+            {{/each}}
+        </div>
+    {{else}}
+        <h1>No Products</h1>
+    {{/if}}
+</main>

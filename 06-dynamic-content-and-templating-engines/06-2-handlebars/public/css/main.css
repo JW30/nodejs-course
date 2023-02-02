@@ -1,0 +1,112 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+header {
+    height: 3.5rem;
+    background-color: #1c724a;
+    padding: 0 7%;
+}
+
+nav {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+li a {
+    text-decoration: none;
+    color: white;
+}
+
+li a:hover {
+    text-decoration: underline;
+}
+
+li a.active {
+    text-decoration: underline;
+}
+
+main {
+    padding: 3% 7%;
+}
+
+h1 {
+    margin: 0 0 1rem 0;
+}
+
+input {
+    width: 33%;
+    display: block;
+    height: 1.25rem;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    margin-bottom: 1rem;
+}
+
+button {
+    border: none;
+    border-radius: 3px;
+    background-color: #1c724a;
+    color: white;
+    padding: 10px 14px;
+    transition: 0.2s;
+    font-size: 16px;
+    margin-bottom: 1rem;
+}
+
+button:hover {
+    background-color: #24915e;
+}
+
+.prod-grid {
+    display: grid;
+    grid-gap: 1rem;
+    grid-template-columns: auto auto auto;
+}
+
+@media only screen and (max-width: 991px) {
+    .prod-grid {
+        grid-template-columns: auto auto;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .prod-grid {
+        grid-template-columns: auto;
+    }
+}
+
+.prod-card {
+    text-align: center;
+    height: 60vh;
+    box-shadow: rgba(100, 100, 111, 0.2) 0 7px 29px 0;
+    padding: 1rem;
+}
+
+.prod-text {
+    max-height: 34%;
+    overflow: scroll;
+    margin: 0 0 1rem 0;
+}
+
+img {
+    height: 30%;
+    object-fit: contain;
+}
+
+h2, img {
+    margin: 0;
+    padding-bottom: 1rem;
+}

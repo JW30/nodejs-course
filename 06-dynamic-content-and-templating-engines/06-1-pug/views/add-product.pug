@@ -1,0 +1,12 @@
+extends layouts/main-layout
+
+block head
+    title Add Product
+
+block content
+    main
+        h1 Add new product
+        form(action="add-product", method="POST")
+            input(type="text", name="title")
+            button(type="submit") Add Product
+

@@ -1,0 +1,15 @@
+extends layouts/main
+
+block head
+    title Users
+
+block content
+    if users.length > 0
+        h1 Users
+        ul
+            each user in users
+                li #{user.username}
+        form(action="del-users", method="POST")
+            button.del-btn(type="submit") Delete Users
+    else
+        h1 No Users Found
