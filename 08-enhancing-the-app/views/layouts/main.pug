@@ -10,6 +10,7 @@ html(lang="en")
             crossorigin="anonymous")
         link(href="/css/main.css", rel="stylesheet")
         block head
+        script(src="https://kit.fontawesome.com/e88e0abea8.js", crossorigin="anonymous")
     body
         header
             nav.navbar.navbar-expand-md
@@ -25,8 +26,22 @@ html(lang="en")
                     .collapse.navbar-collapse(id="navbarSupportedContent")
                         ul.navbar-nav
                             li.nav-item
+                                a.nav-link(href="/products",
+                                    class=(active === 'products' ? 'my-active' : '')) Products
+                            li.nav-item
+                                a.nav-link(href="/orders",
+                                    class=(active === 'orders' ? 'my-active' : '')) Orders
+                            li.nav-item
                                 a.nav-link(href="/admin/add-product",
                                     class=(active === 'add-product' ? 'my-active' : '')) Add Product
+                            li.nav-item
+                                a.nav-link(href="/admin/products",
+                                    class=(active === 'admin-products' ? 'my-active' : '')) Admin Products
+                        ul.navbar-nav.ms-auto
+                            li.nav-item
+                                a.nav-link.my-icon(href="/cart",
+                                    class=(active === 'cart' ? 'my-active' : ''))
+                                    i.fa-solid.fa-cart-shopping
         block content
         script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js",
             integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN",

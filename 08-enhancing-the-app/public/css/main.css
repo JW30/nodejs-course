@@ -1,0 +1,59 @@
+header {
+    padding: 0 3%;
+}
+
+nav {
+    border-bottom: 2px solid #212529;
+}
+
+.nav-link:hover {
+    color: #AA6C39;
+}
+
+.my-active {
+    color: #AA6C39;
+}
+
+h2, h4 {
+    text-align: center;
+    padding: 2rem 0;
+}
+
+.card {
+    text-align: center;
+}
+
+img {
+    height: 250px;
+    object-fit: cover;
+}
+
+i {
+    font-size: 1.25rem;
+}
+
+.cart-col {
+    border-bottom: 2px solid #212529;
+}
+
+a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.card-text {
+    margin-bottom: 0;
+}
+
+.edit-icon {
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
+}
+
+.edit-icon:hover {
+    color: #d22d2d;
+}
+
+hr {
+
+}

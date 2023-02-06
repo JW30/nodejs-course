@@ -1,0 +1,27 @@
+extends ../layouts/main
+
+block content
+    .container
+        if (prods.length > 0)
+            h2 All Products
+            .row
+                each prod in prods
+                    .col-lg-2.col-md-3.col-sm-6.col-6
+                        a(href="/admin/edit-product")
+                            .card.mb-4
+                                img.card-img-top(src=prod.image)
+                                .card-body
+                                    h5.card-title #{prod.title}
+                                    p.card-text #{prod.price}
+                                hr.mt-0
+                                .d-flex.justify-content-center.mb-3
+                                    a.edit-icon.p-2.me-3(href="/admin/edit-product")
+                                        i.fa-solid.fa-pen-to-square
+                                    form(action="/admin/delete-product", method="POST")
+                                        input(type="submit", id="submit", hidden)
+                                        label(for="submit")
+                                            a.edit-icon.p-2.ms-3(type="submit")
+                                                i.fa-solid.fa-trash
+
+        else
+            h2 No Products
