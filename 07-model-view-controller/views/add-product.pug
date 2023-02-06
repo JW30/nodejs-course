@@ -1,0 +1,18 @@
+extends layouts/main
+
+block content
+    .container
+        h2 Add Product
+        form(action="/admin/add-product", method="POST")
+            .mb-3
+                label.form-label(for="title") Product title
+                input.form-control(type="text", name="title", id="title", required)
+            .mb-3
+                label.form-label(for="price") Price
+                input.form-control(type="number", step="any", name="price", id="price", required)
+            .mb-3
+                label.form-label(for="image") Product image
+                input.form-control(type="text", name="image", id="image", required)
+                .form-text Please provide a valid URL to the product image
+
+            button.btn.btn-dark(type="submit") Submit
