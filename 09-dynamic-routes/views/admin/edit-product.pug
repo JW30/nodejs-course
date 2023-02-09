@@ -1,0 +1,32 @@
+extends ../layouts/main
+
+block content
+    form(action="/admin/edit-product", method="POST")
+        input(type="hidden", name="id", value=prod.id)
+        .container.mt-5
+            .row
+                .col-lg-6.text-center
+                    #detail-img.my-4
+                        img.edit-img.mb-4(src=prod.image)
+                        label.form-label(for="image")
+                        input.form-control.text-center(type="text", name="image", id="image", value=prod.image, required)
+                        .form-text Please provide a valid URL to the product image
+                hr.details-hr.my-4
+                .col-lg-6
+                    #detail-text.my-4
+                        .mb-4
+                            label.form-label(for="title") Product title
+                            input.form-control(type="text", name="title", id="title", value=prod.title, required)
+                        .mb-4
+                            label.form-label(for="description") Product description
+                            textarea.form-control(name="description", id="description", rows=3, required)= prod.description
+                        .mb-4
+                            label.form-label(for="price") Price
+                            input.form-control(type="number", step="any", name="price", id="price", value=Number((prod.price).toFixed(2)), required)
+                        .d-flex
+                            input(type="submit", id="submit", hidden)
+                            label(for="submit")
+                                a.btn.btn-dark Update product
+                            a.delete-anchor.p-2.ms-3(href="/admin/delete-product/" + prod.id) Delete product
+    script(src="/js/update-img.js")
+    script(src="/js/resize-textarea.js")

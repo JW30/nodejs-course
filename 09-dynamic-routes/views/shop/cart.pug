@@ -1,0 +1,57 @@
+extends ../layouts/main
+
+block content
+    .container
+        .row
+            .col-lg-8.col-md-7.col-6
+                h4.cart-col.pb-3 Your Shopping Cart
+                .row
+                    if (prods.length > 0)
+                        each prod in prods
+                            .col-lg-4.col-md-6
+                                a.no-styling-a(href="/products/" + prod.id)
+                                    .card.mb-4
+                                        img.card-img-top(src=prod.image)
+                                        .card-body
+                                            .qty.mb-2
+                                                form.qty-form(action="/delete-product", method="POST")
+                                                    input(type="hidden", name="prodID", value=prod.id)
+                                                    input(type="hidden", name="erase", value=false)
+                                                    input(type="submit", id="submit: " + prod.id, hidden)
+                                                    label(for="submit: " + prod.id)
+                                                        i.fa-solid.fa-minus.qty-icon.p-1
+                                                span.card-text.px-3!= prod.qty + "×"
+                                                form.qty-form(action="/cart", method="POST")
+                                                    input(type="hidden", name="prodID", value=prod.id)
+                                                    input(type="submit", id="add: " + prod.id, hidden)
+                                                    label(for="add: " + prod.id)
+                                                        i.fa-solid.fa-plus.qty-icon.p-1
+                                            h5.card-title.mb-2 #{prod.title}
+                                            p.card-text= "$" + Number((prod.price).toFixed(2))
+                                            if (prod.qty > 1)
+                                                p.card-text.mt-2= "Total $" + Number((prod.price * prod.qty).toFixed(2))
+                                            form(action="/delete-product", method="POST")
+                                                input(type="hidden", name="prodID", value=prod.id)
+                                                input(type="hidden", name="erase", value=true)
+                                                input(type="submit", id="erase: " + prod.id, hidden)
+                                                label(for="erase: " + prod.id)
+                                                    .delete-anchor.p-2 Remove from Cart
+
+
+                    else
+                        .col.light-text.text-center Your Shopping Cart is empty
+            .col-lg-4.col-md-5.col-6
+                h4.cart-col.pb-3 Cart Total
+                .row.mb-2
+                    .col Order value
+                    .col.text-end= "$" + (cart.totalPrice ? cart.totalPrice : 0)
+                .row.mb-2
+                    .col Delivery
+                    .col.text-end= cart.totalPrice > 50 ? "FREE" : "$4.99"
+                hr
+                .row
+                    .col.total-text TOTAL
+                    .col.total-price.text-end= "$" + Number((cart.totalPrice > 50 ? cart.totalPrice : (cart.totalPrice ? cart.totalPrice : 0) + 4.99).toFixed(2))
+                button.btn.btn-dark.w-100.mt-3 Checkout
+    script(src="/js/resize-cards.js")
+    script(src="/js/update-qty.js")
