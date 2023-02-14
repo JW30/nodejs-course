@@ -1,0 +1,18 @@
+extends ../layouts/main
+
+block content
+    .container
+        if (prods.length > 0)
+            h2 All Products
+            .row
+                each prod in prods
+                    .col-lg-3.col-md-4.col-sm-6.col-6.mb-4
+                        a.no-styling-a(href="/products/" + prod.id)
+                            .card.h-100
+                                img.card-img-top(src=prod.imageURL)
+                                .card-body
+                                    h5.card-title #{prod.title}
+                                    p.card-text= "$" + Number((prod.price).toFixed(2))
+        else
+            h2 No Products
+    script(src="/js/resize-cards.js")
