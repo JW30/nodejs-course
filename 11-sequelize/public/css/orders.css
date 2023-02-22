@@ -1,0 +1,44 @@
+.order-container {
+    width: 70%;
+    margin: auto;
+}
+
+.card-header-heading {
+    font-size: 0.8rem;
+    color: grey;
+}
+
+.order-img {
+    height: 100px;
+    object-fit: contain;
+}
+
+.underline-a:hover {
+    text-decoration: underline;
+}
+
+.qty-badge {
+    background-color: #F8F8F8;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    border: 1px solid #ccc;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+@media only screen and (max-width: 991px) {
+    .order-container {
+        width: 90%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .order-container {
+        width: 95%;
+    }
+}
+

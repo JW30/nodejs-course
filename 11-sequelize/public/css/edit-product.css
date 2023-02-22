@@ -1,0 +1,11 @@
+.edit-img-large {
+    max-height: 60vh;
+    object-fit: contain;
+    width: 100%;
+}
+
+@media only screen and (max-width: 991px) {
+    .edit-img-large {
+        max-height: 50vh;
+    }
+}

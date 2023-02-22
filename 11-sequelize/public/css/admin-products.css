@@ -1,0 +1,12 @@
+.edit-icon {
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
+}
+
+.edit-icon:hover {
+    color: #d22d2d;
+}
+
+.edit-icon {
+    font-size: 1.25rem;
+}

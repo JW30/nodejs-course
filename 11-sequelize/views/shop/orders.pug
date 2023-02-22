@@ -1,0 +1,46 @@
+extends ../layouts/main
+
+block head
+    link(rel="stylesheet" href="/css/orders.css")
+
+block content
+    .order-container
+        if orders.length > 0
+            h2.main-heading Your Orders
+            each order in orders
+                .card.mb-4
+                    .card-header
+                        .d-flex.flex-row.gap-5
+                            .d-flex.flex-column
+                                div.card-header-heading ORDER PLACED
+                                div #{order.orderDate}
+                            .d-flex.flex-column
+                                div.card-header-heading TOTAL
+                                div $#{order.dataValues.total}
+                            .d-flex.flex-column.ms-auto
+                                div.card-header-heading= "ORDER #" + order.dataValues.id
+                    .card-body
+                        .row
+                            .col-9
+                                .mb-3
+                                    .d-flex.gap-3
+                                        h4.m-0 #{order.status}
+                                        if (order.statusCode === 0)
+                                            button.btn.btn-primary.btn-sm Track package
+                                    if (order.statusCode === 0)
+                                        .card-text.mt-2 Estimated delivery #{order.deliveryDate}
+                                each orderItem in order.orderItems
+                                    .mb-3
+                                        .d-flex
+                                            a.no-styling-a(href="/products/" + orderItem.product.id)
+                                                img.order-img(src=orderItem.product.imageURL)
+                                            .d-flex.flex-column.ms-3
+                                                a.no-styling-a.underline-a.mb-2(href="/products/" + orderItem.product.id)
+                                                    .card-text #{orderItem.product.title}
+                                                if (orderItem.qty > 1)
+                                                    .qty-badge #{orderItem.qty}×
+                            .col-3
+                                button.btn.btn-secondary.btn-sm.w-100.mb-2 Return items
+                                button.btn.btn-secondary.btn-sm.w-100 Write a product review
+        else
+            h2.main-heading No Orders

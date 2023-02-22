@@ -1,0 +1,67 @@
+extends ../layouts/main
+
+block head
+    link(rel="stylesheet" href="/css/product-cards.css")
+    link(rel="stylesheet" href="/css/cart.css")
+
+block content
+    .container
+        .row
+            .col-lg-8.col-md-7.col-6
+                h4.cart-heading.pb-3 Your Shopping Cart
+                .row
+                    if (cartItems.length > 0)
+                        each cartItem in cartItems
+                            - const prod = cartItem.product;
+                            - const prodTotal = Math.round((prod.price * cartItem.qty + Number.EPSILON) * 100) / 100;
+                            .col-lg-6.mb-4
+                                a.no-styling-a(href="/products/" + prod.id)
+                                    .card.h-100
+                                        img.card-img-top(src=prod.imageURL)
+                                        .card-body.d-flex.flex-column
+                                            .qty.mb-2
+                                                form.qty-form(action="/reduce-product" method="POST")
+                                                    input(type="hidden" name="prodID" value=prod.id)
+                                                    input(type="hidden" name="erase" value=false)
+                                                    input(type="submit" id="submit: " + prod.id hidden)
+                                                    label(for="submit: " + prod.id)
+                                                        i.fa-solid.fa-minus.qty-icon.p-1
+                                                span.card-text.px-3!= cartItem.qty + "×"
+                                                form.qty-form(action="/cart" method="POST")
+                                                    input(type="hidden" name="prodID" value=prod.id)
+                                                    input(type="submit" id="add: " + prod.id hidden)
+                                                    label(for="add: " + prod.id)
+                                                        i.fa-solid.fa-plus.qty-icon.p-1
+                                            h5.card-title.mb-2 #{prod.title}
+                                            p.card-text.m-0= "$" + prod.price
+                                            if (cartItem.qty > 1)
+                                                p.card-text.m-0.mt-2= "Total $" + prodTotal
+                                            .mt-auto
+                                                form(action="/delete-product" method="POST")
+                                                    input(type="hidden" name="prodID" value=prod.id)
+                                                    input(type="hidden" name="erase" value=true)
+                                                    input(type="submit" id="erase: " + prod.id hidden)
+                                                    label(for="erase: " + prod.id)
+                                                        .delete-anchor.p-2 Remove from Cart
+                    else
+                        .grey.text-center.h-100 Your Shopping Cart is empty
+            .col-lg-4.col-md-5.col-6
+                h4.cart-heading.pb-3 Cart Total
+                .row.mb-2
+                    .col Order value
+                    .col.text-end= "$" + cartTotal
+                .row.mb-2
+                    .col Delivery
+                    .col.text-end= cartTotal < 50 ? "$" + 4.99 : "FREE"
+                hr
+                .row
+                    .col.total-text TOTAL
+                    - const cartTotalWithDelivery = Math.round((cartTotal + 4.99 + Number.EPSILON) * 100) / 100;
+                    - const totalTotal = cartTotal < 50 ? cartTotalWithDelivery : cartTotal;
+                    .col.total-price.text-end= "$" + totalTotal
+                form.qty-form.w-100.mt-3(action="/checkout" method="POST")
+                    input(type="hidden" name="cartItems" value=cartItems)
+                    input(type="hidden" name="cartTotal" value=totalTotal)
+                    input(type="submit" id="checkout" hidden)
+                    label.w-100(for="checkout")
+                        a.btn.btn-dark.w-100 Checkout

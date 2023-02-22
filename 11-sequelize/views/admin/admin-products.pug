@@ -1,0 +1,30 @@
+extends ../layouts/main
+
+block head
+    link(rel="stylesheet" href="/css/product-cards.css")
+    link(rel="stylesheet" href="/css/admin-products.css")
+
+block content
+    .container
+        if (prods.length > 0)
+            h2.main-heading All Products
+            .row
+                each prod in prods
+                    .col-lg-3.col-md-4.col-sm-6.col-6.mb-4
+                            .card.h-100
+                                a.no-styling-a.h-100(href="/admin/edit-product/" + prod.id)
+                                    img.card-img-top(src=prod.imageURL)
+                                    .card-body.d-flex.flex-column
+                                        h5.card-title #{prod.title}
+                                        p.card-text= "$" + Number((prod.price).toFixed(2))
+                                hr.m-0
+                                .d-flex.justify-content-evenly.py-3
+                                    a.no-styling-a.edit-icon.p-2(href="/admin/edit-product/" + prod.id)
+                                        i.fa-solid.fa-pen-to-square
+                                    form(action="/admin/delete-product/" + prod.id method="POST")
+                                        input(type="submit" id="submit: " + prod.id hidden)
+                                        label(for="submit: " + prod.id)
+                                            a.no-styling-a.edit-icon.p-2(type="submit")
+                                                i.fa-solid.fa-trash
+        else
+            h2.main-heading No Products
