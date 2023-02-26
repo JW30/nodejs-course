@@ -1,0 +1,21 @@
+extends ../layouts/main
+
+block content
+    .container
+        h2.main-heading Add Product
+        form(action="/admin/add-product" method="POST")
+            .mb-3
+                label.form-label(for="title") Product title
+                input.form-control(type="text" name="title" id="title" required)
+            .mb-3
+                label.form-label(for="description") Product description
+                textarea.form-control(name="description" id="description" rows=3 required)
+            .mb-3
+                label.form-label(for="price") Price
+                input.form-control(type="number" step="any" name="price" id="price" required)
+            .mb-3
+                label.form-label(for="imageURL") Product image
+                input.form-control(type="url" name="imageURL" id="imageURL" required)
+                .form-text Please provide a valid URL to the product image
+
+            button.btn.btn-dark(type="submit") Submit
