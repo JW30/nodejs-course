@@ -1,7 +1,8 @@
 const Product = require("../models/product");
 
 exports.getAdminProducts = (req, res) => {
-    Product.fetchAll().then(prods => {
+    Product.find({ userId: req.user._id }).then(prods => {
+        console.log(prods);
         res.render('admin/admin-products', {
             prods: prods,
             pageTitle: 'Admin Products',
@@ -19,14 +20,13 @@ exports.getAddProduct = (req, res) => {
 
 exports.postAddProduct = (req, res) => {
     const price = Number(parseFloat(req.body.price).toFixed(2));
-    const product = new Product(
-        req.body.title,
-        price,
-        req.body.description.replace(/\n/g, "<br />"),
-        req.body.imageURL,
-        null,
-        req.user._id
-    );
+    const product = new Product({
+        title: req.body.title,
+        price: price,
+        description: req.body.description.replace(/\n/g, "<br />"),
+        imageURL: req.body.imageURL,
+        userId: req.user._id
+    });
     product.save().then(() => {
         res.redirect('/products');
     });
@@ -44,21 +44,18 @@ exports.getEditProduct = (req, res) => {
 
 exports.postEditProduct = (req, res) => {
     const price = Number(parseFloat(req.body.price).toFixed(2));
-    const prod = new Product(
-        req.body.title,
-        price,
-        req.body.description.replace(/\n/g, "<br />"),
-        req.body.imageURL,
-        req.body.id,
-        req.user._id
-    );
-    prod.save().then(() => {
+    Product.findByIdAndUpdate(req.body.id, {
+        title: req.body.title,
+        price: price,
+        description: req.body.description.replace(/\n/g, "<br />"),
+        imageURL: req.body.imageURL
+    }).then(() => {
         res.redirect("/admin/products");
     });
 }
 
 exports.postDeleteProduct = (req, res) => {
-    Product.deleteById(req.params.prodID)
+    Product.deleteOne({_id: req.params.prodID})
         .then(() => {
             res.redirect("/admin/products")
         });

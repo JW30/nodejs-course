@@ -13,33 +13,33 @@ block content
                     if (cart.items.length > 0)
                         each item in cart.items
                             .col-lg-6.mb-4
-                                a.no-styling-a(href="/products/" + item._id)
+                                a.no-styling-a(href="/products/" + item._id._id)
                                     .card.h-100
-                                        img.card-img-top(src=item.imageURL)
+                                        img.card-img-top(src=item._id.imageURL)
                                         .card-body.d-flex.flex-column
                                             .qty.mb-2
                                                 form.qty-form(action="/reduce-product" method="POST")
-                                                    input(type="hidden" name="prodID" value=item._id)
+                                                    input(type="hidden" name="prodID" value=item._id._id)
                                                     input(type="hidden" name="erase" value=false)
-                                                    input(type="submit" id="submit: " + item._id hidden)
-                                                    label(for="submit: " + item._id)
+                                                    input(type="submit" id="submit: " + item._id._id hidden)
+                                                    label(for="submit: " + item._id._id)
                                                         i.fa-solid.fa-minus.qty-icon.p-1
                                                 span.card-text.px-3!= item.qty + "×"
                                                 form.qty-form(action="/cart" method="POST")
-                                                    input(type="hidden" name="prodID" value=item._id)
-                                                    input(type="submit" id="add: " + item._id hidden)
-                                                    label(for="add: " + item._id)
+                                                    input(type="hidden" name="prodID" value=item._id._id)
+                                                    input(type="submit" id="add: " + item._id._id hidden)
+                                                    label(for="add: " + item._id._id)
                                                         i.fa-solid.fa-plus.qty-icon.p-1
-                                            h5.card-title.mb-2 #{item.title}
-                                            p.card-text.m-0= "$" + item.price
+                                            h5.card-title.mb-2 #{item._id.title}
+                                            p.card-text.m-0= "$" + item._id.price
                                             if (item.qty > 1)
-                                                p.card-text.m-0.mt-2= "Total $" + item.productTotal
+                                                p.card-text.m-0.mt-2= "Total $" + item.total
                                             .mt-auto
                                                 form(action="/delete-product" method="POST")
-                                                    input(type="hidden" name="prodID" value=item._id)
+                                                    input(type="hidden" name="prodID" value=item._id._id)
                                                     input(type="hidden" name="erase" value=true)
-                                                    input(type="submit" id="erase: " + item._id hidden)
-                                                    label(for="erase: " + item._id)
+                                                    input(type="submit" id="erase: " + item._id._id hidden)
+                                                    label(for="erase: " + item._id._id)
                                                         .delete-anchor.p-2 Remove from Cart
                     else
                         .grey.text-center.h-100 Your Shopping Cart is empty
