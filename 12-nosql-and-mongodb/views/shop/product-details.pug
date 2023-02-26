@@ -1,0 +1,23 @@
+extends ../layouts/main
+
+block head
+    link(rel="stylesheet" href="/css/product-details.css")
+
+block content
+    .container.my-5
+                .row
+                    .col-lg-6.text-center
+                        img.product-img-large(src=prod.imageURL)
+                    hr.details-hr.my-5
+                    .col-lg-6
+                        #text-col
+                            h4.mb-4 #{prod.title}
+                            p#description.m-0!= prod.description
+                            a#toggle-btn.mt-4(href="#" onclick="toggle(); return false;") Read less
+                            h4.my-4= "$" + Number((prod.price).toFixed(2))
+                            form(action="/cart" method="POST")
+                                input(type="hidden" name="prodID" value=prod._id)
+                                input(type="submit" id="submit" hidden)
+                                label(for="submit")
+                                    a.btn.btn-dark Add to Cart
+    script(src="/js/toggle-description.js")

@@ -1,0 +1,40 @@
+.cart-heading {
+    padding-top: 2rem;
+    text-align: center;
+    border-bottom: 2px solid #212529;
+}
+
+.grey {
+    color: grey;
+}
+
+.qty-form {
+    display: inline-block;
+}
+
+.qty {
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+.qty-icon {
+    cursor: pointer;
+    transition-duration: 0.15s;
+    transition-timing-function: ease-in-out;
+}
+
+.qty-icon:hover {
+    color: white;
+    background-color: #212529;
+}
+
+.total-text {
+    font-size: 0.8rem;
+}
+
+.total-price {
+    font-size: 2rem;
+}
+
+
+
