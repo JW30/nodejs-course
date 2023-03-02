@@ -1,0 +1,56 @@
+/***** NAVBAR ******/
+header {
+    padding: 0 3%;
+}
+
+nav {
+    border-bottom: 2px solid #212529;
+}
+
+.nav-link:hover {
+    color: #AA6C39;
+}
+
+.my-active {
+    color: #AA6C39;
+}
+
+.c-pointer {
+    cursor: pointer;
+}
+
+/***** GENERAL *****/
+.no-styling-a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.main-heading {
+    padding: 2rem 0;
+    text-align: center;
+}
+
+.details-hr {
+    display: none;
+}
+
+@media only screen and (max-width: 991px) {
+    .details-hr {
+        display: inline-block;
+    }
+}
+
+.delete-anchor {
+    color: red;
+    text-decoration: underline;
+    cursor: pointer;
+    transition: 0.15s ease-in-out;
+}
+
+.delete-anchor:visited {
+    color: red;
+}
+
+.delete-anchor:hover {
+    color: darkred;
+}

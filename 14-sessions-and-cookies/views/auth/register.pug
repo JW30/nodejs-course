@@ -1,0 +1,24 @@
+extends ../layouts/main
+
+block head
+    link(rel="stylesheet" href="/css/auth.css")
+
+block content
+    .container
+        h2.main-heading Create new account
+        form(action="/register" method="POST")
+            .mb-3
+                label.form-label(for="firstName") First name
+                input.form-control(type="text" name="firstName" id="firstName" required)
+            .mb-3
+                label.form-label(for="lastName") Last name
+                input.form-control(type="text" name="lastName" id="lastName" required)
+            .mb-3
+                label.form-label(for="email") Email
+                input.form-control(type="email" name="email" id="email" required)
+            .mb-3
+                label.form-label(for="password") Password
+                input.form-control(type="password", name="password" id="password" required)
+            .my-container
+                button.btn.btn-dark(type="submit") Register account
+

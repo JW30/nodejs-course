@@ -1,0 +1,63 @@
+extends ../layouts/main
+
+block head
+    link(rel="stylesheet" href="/css/product-cards.css")
+    link(rel="stylesheet" href="/css/cart.css")
+
+block content
+    .container
+        .row
+            .col-lg-8.col-md-7.col-6
+                h4.cart-heading.pb-3 Your Shopping Cart
+                .row
+                    if (cart.items.length > 0)
+                        each item in cart.items
+                            .col-lg-6.mb-4
+                                a.no-styling-a(href="/products/" + item._id._id)
+                                    .card.h-100
+                                        img.card-img-top(src=item._id.imageURL)
+                                        .card-body.d-flex.flex-column
+                                            .qty.mb-2
+                                                form.qty-form(action="/reduce-product" method="POST")
+                                                    input(type="hidden" name="prodID" value=item._id._id)
+                                                    input(type="hidden" name="erase" value=false)
+                                                    input(type="submit" id="submit: " + item._id._id hidden)
+                                                    label(for="submit: " + item._id._id)
+                                                        i.fa-solid.fa-minus.qty-icon.p-1
+                                                span.card-text.px-3!= item.qty + "×"
+                                                form.qty-form(action="/cart" method="POST")
+                                                    input(type="hidden" name="prodID" value=item._id._id)
+                                                    input(type="submit" id="add: " + item._id._id hidden)
+                                                    label(for="add: " + item._id._id)
+                                                        i.fa-solid.fa-plus.qty-icon.p-1
+                                            h5.card-title.mb-2 #{item._id.title}
+                                            p.card-text.m-0= "$" + item._id.price
+                                            if (item.qty > 1)
+                                                p.card-text.m-0.mt-2= "Total $" + item.total
+                                            .mt-auto
+                                                form(action="/delete-product" method="POST")
+                                                    input(type="hidden" name="prodID" value=item._id._id)
+                                                    input(type="hidden" name="erase" value=true)
+                                                    input(type="submit" id="erase: " + item._id._id hidden)
+                                                    label(for="erase: " + item._id._id)
+                                                        .delete-anchor.p-2 Remove from Cart
+                    else
+                        .grey.text-center.h-100 Your Shopping Cart is empty
+            .col-lg-4.col-md-5.col-6
+                h4.cart-heading.pb-3 Cart Total
+                .row.mb-2
+                    .col Order value
+                    .col.text-end= "$" + cart.total
+                .row.mb-2
+                    .col Delivery
+                    .col.text-end= cart.total < 50 ? "$" + 4.99 : "FREE"
+                hr
+                .row
+                    .col.total-text TOTAL
+                    - const cartTotalWithDelivery = Math.round((parseFloat(cart.total) + 4.99 + Number.EPSILON) * 100) / 100;
+                    - const totalTotal = cart.total < 50 ? cartTotalWithDelivery : cart.total;
+                    .col.total-price.text-end= "$" + totalTotal
+                form.qty-form.w-100.mt-3(action="/checkout" method="POST")
+                    input(type="submit" id="checkout" hidden)
+                    label.w-100(for="checkout")
+                        a.btn.btn-dark.w-100 Checkout
