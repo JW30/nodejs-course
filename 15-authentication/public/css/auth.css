@@ -1,0 +1,9 @@
+.w-10rem {
+    min-width: 10rem;
+}
+
+@media only screen and (max-width: 767px) {
+    .my-container {
+        text-align: center;
+    }
+}
