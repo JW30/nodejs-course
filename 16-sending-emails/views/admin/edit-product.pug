@@ -1,0 +1,37 @@
+extends ../layouts/main
+
+block head
+    link(rel="stylesheet" href="/css/edit-product.css")
+
+block content
+    form(action="/admin/edit-product" method="POST")
+        input(type="hidden" name="_csrf" value=csrfToken)
+        input(type="hidden" name="id" value=prod._id)
+        .container.my-5
+            .row
+                .col-lg-6.text-center
+                        img.edit-img-large.mb-4(src=prod.imageURL)
+                        label.form-label(for="imageURL")
+                        input.form-control.text-center(type="url" name="imageURL" id="imageURL" value=prod.imageURL required)
+                        .form-text Please provide a valid URL to the product image
+                hr.details-hr.my-5
+                .col-lg-6
+                    .mb-4
+                        label.form-label(for="title") Product title
+                        input.form-control(type="text" name="title" id="title" value=prod.title required)
+                    .mb-4
+                        label.form-label(for="description") Product description
+                        textarea.form-control(name="description" id="description" required)= prod.description
+                    .mb-4
+                        label.form-label(for="price") Price
+                        input.form-control(type="number" step="any" name="price" id="price" value=Number(prod.price).toFixed(2) required)
+                    .d-flex
+                        input(type="submit" id="submit" hidden)
+                        label(for="submit")
+                            button.btn.btn-dark Update product
+                        label(for="deleteProduct").p-2.ms-3
+                            a.delete-anchor Delete product
+    form(action="/admin/delete-product/" + prod.id method="POST")
+        input(type="hidden" name="_csrf" value=csrfToken)
+        input(type="submit" id="deleteProduct" hidden)
+    script(src="/js/update-img.js")

@@ -1,0 +1,40 @@
+extends ../layouts/main
+
+block head
+    link(rel="stylesheet" href="/css/auth.css")
+
+block content
+    .container
+        h2.main-heading Login
+        if accountCreated
+            .alert.alert-success.alert-dismissible.fade.show(role="alert")
+                | Account created successfully! Please log in.
+                button.btn-close(type="button" data-bs-dismiss="alert" aria-label="Close")
+        form(action="/login" method="POST")
+            input(type="hidden" name="_csrf" value=csrfToken)
+            .mb-3
+                label.form-label(for="email") Email
+                input.form-control(
+                    type="email"
+                    name="email"
+                    id="email"
+                    class=`${invalidEmail ? 'is-invalid' : ''} ${email ? 'is-valid' : ''}`
+                    value=email ? email : ""
+                    required
+                )
+                .valid-feedback Looks good!
+                .invalid-feedback
+                    span="Email does not exist. "
+                        a(href="/sign-up") Sign up
+                    span=" instead?"
+            .mb-3
+                label.form-label(for="password") Password
+                input.form-control(type="password" name="password"
+                    id="password"
+                    class=invalidPassword ? "is-invalid": "" required)
+                .invalid-feedback Wrong password.
+            .my-container
+                button.btn.btn-dark.w-10rem.mb-3(type="submit") Login
+                .text-secondary Don't have an account yet?
+                a(href="/sign-up") Create new account
+

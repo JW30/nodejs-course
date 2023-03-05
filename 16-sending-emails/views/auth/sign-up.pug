@@ -1,0 +1,30 @@
+extends ../layouts/main
+
+block head
+    link(rel="stylesheet" href="/css/auth.css")
+
+block content
+    .container
+        h2.main-heading Create new account
+        form(action="/sign-up" method="POST")
+            input(type="hidden" name="_csrf" value=csrfToken)
+            .mb-3
+                label.form-label(for="email") Email
+                input.form-control(
+                    type="email"
+                    name="email"
+                    id="email"
+                    class=`${emailAlreadyExists ? 'is-invalid': ''}`
+                    required)
+                .invalid-feedback="Email already exists. "
+                    a(href="/login") Log in
+                    span=" instead?"
+            .mb-3
+                label.form-label(for="password") Password
+                input.form-control(type="password", name="password" id="password" required)
+            .mb-3
+                label.form-label(for="password") Confirm password
+                input.form-control(type="password", name="confirm-password" id="confirm-password" required)
+            .my-container
+                button.btn.btn-dark.w-10rem(type="submit") Sign up
+
